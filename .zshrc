@@ -56,3 +56,6 @@ fi
 source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
+
+test -f ~/.stk/bin/.zshrc && . ~/.stk/bin/.zshrc
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
