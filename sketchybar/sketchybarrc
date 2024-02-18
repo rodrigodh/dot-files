@@ -24,7 +24,7 @@ BG=0x651e1e2e
 # https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
 
 sketchybar --bar \
-  margin=17 y_offset=38 height=38 \
+  margin=12 y_offset=4 height=38 \
   corner_radius=6 blur_radius=5 \
   border_width=1 border_color=0x28222222 \
   padding_left=17 padding_right=20 \
@@ -48,12 +48,6 @@ default=(
 )
 
 sketchybar --default "${default[@]}"
-
-
-##### Adding Mission Control Space Indicators #####
-# Let's add some mission control spaces:
-# https://felixkratz.github.io/SketchyBar/config/components#space----associate-mission-control-spaces-with-an-item
-# to indicate active and available mission control spaces.
 
 sketchybar --add item moon-phase left \
   --set moon-phase \
@@ -86,32 +80,15 @@ do
   sketchybar --add space space."$sid" left --set space."$sid" "${space[@]}"
 done
 
-##### Adding Left Items #####
-# We add some regular items to the left side of the bar, where
-# only the properties deviating from the current defaults need to be set
-
-
-
-
-##### Adding Right Items #####
-# In the same way as the left items we can add items to the right side.
-# Additional position (e.g. center) are available, see:
-# https://felixkratz.github.io/SketchyBar/config/items#adding-items-to-sketchybar
-
-# Some items refresh on a fixed cycle, e.g. the clock runs its script once
-# every 10s. Other items respond to events they subscribe to, e.g. the
-# volume.sh script is only executed once an actual change in system audio
-# volume is registered. More info about the event system can be found here:
-# https://felixkratz.github.io/SketchyBar/config/events
-
 sketchybar --add item clock right \
            --set clock update_freq=10 icon=  script="$PLUGIN_DIR/clock.sh" \
+           --add item battery right \
+           --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
+           --subscribe battery system_woke power_source_change \
            --add item volume right \
            --set volume script="$PLUGIN_DIR/volume.sh" \
            --subscribe volume volume_change \
-           --add item battery right \
-           --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
-           --subscribe battery system_woke power_source_change
+
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update
