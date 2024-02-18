@@ -1,5 +1,6 @@
 # -- Open Apps --
 alt - q : kitty ~/.
+alt - e : open -a /Applications/Firefox.app
 
 # -- Changing Window Focus --
 
