@@ -16,6 +16,8 @@ export ZSH=$HOME/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
 alias vim=nvim
+alias python=python3
+alias pip=pip3
 
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
@@ -61,3 +63,4 @@ test -f ~/.stk/bin/.zshrc && . ~/.stk/bin/.zshrc
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 
 export PATH=$PATH:/Users/rodrigodh/.spicetify
+export TERM=xterm-256color
