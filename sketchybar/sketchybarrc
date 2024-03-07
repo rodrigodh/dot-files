@@ -89,6 +89,27 @@ sketchybar --add item clock right \
            --set volume script="$PLUGIN_DIR/volume.sh" \
            --subscribe volume volume_change \
 
+sketchybar --add item btc right \
+              --set btc icon= \
+              --set btc script="$PLUGIN_DIR/btc.sh" \
+              --set btc click_script="$PLUGIN_DIR/btc.sh"
+              
+
+# bitcoin
+get_btc_price() {
+    local btc_price=$(curl -s "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd" | jq -r '.bitcoin.usd')
+    echo "$btc_price"
+}
+
+btc_price=$(get_btc_price)
+
+sketchybar --add item btc right \
+  --set btc \
+  icon= \
+  update_freq=3600 \
+  script="sketchybar --set btc 'label=$btc_price USD'" \
+  --subscribe btc mouse.clicked
+
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update
